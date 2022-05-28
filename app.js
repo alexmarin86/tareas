@@ -12,8 +12,8 @@ const grabaTexto = (event) => {
 	event.preventDefault()
 	const tareaActual = inputTarea.value.toLowerCase()
 	const listaTareas = lista.querySelectorAll('label')
-	validarTarea(tareaActual, listaTareas)
 	const elemLista = document.createElement('li')
+	validarTarea(tareaActual, listaTareas)
 	if (control == true) {
 		control = false
 		return
@@ -55,7 +55,6 @@ const mostrarAlerta = (error) => {
 const ocultarAlerta = () => document.querySelector('.alerta').remove()
 
 //función para validar el input tarea
-
 const validarTarea = (tareaActual, listaTareas) => {
 	if (!inputTarea.value) {
 		mostrarAlerta(listaErrores.introTexto)
@@ -72,7 +71,6 @@ const validarTarea = (tareaActual, listaTareas) => {
 }
 
 //función para crear y añadir elementos li
-
 const crearLi = (tareaActual, elemLista) => {
 	elemLista.classList.add('elem-lista')
 	const idTarea = tareaActual.split(' ').join('')

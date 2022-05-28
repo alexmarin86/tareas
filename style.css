@@ -1,0 +1,87 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-image: url('img/bloc.png');
+    background-repeat: no-repeat;
+    background-position-x: center;
+    background-color: black;
+}
+.contenedor {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 3em;
+    padding: 3em;
+}
+.form-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1em;
+}
+.inputTarea {
+    font-size: 1.8em;
+}
+.enviar {
+    padding: .5em .8em;
+    font-size: 1em;
+    background-color: rgb(4, 56, 39);
+    border: 2px solid rgb(11, 143, 99);
+    color: white;
+    cursor: pointer;
+    transition: all .5s ease-in-out;
+}
+.enviar:hover {
+    filter: brightness(160%);
+}
+input:checked+label {
+    text-decoration: line-through;
+    color: gray;
+}
+ul {
+    user-select: none;
+    list-style-type: none;
+}
+li {
+    font-size: 2em;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .3em;
+}
+.cerrar {
+    color: red;
+    font-weight: bolder;
+    user-select: none;
+    cursor: pointer;
+}
+.editar {
+    color: rgb(165, 143, 18);
+    font-size: .5em;
+    cursor: pointer;
+    transform: rotate(-20deg);
+    margin-left: .6em;
+}
+.alerta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 2em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: red;
+    color: white;
+    width: 100%;
+    font-size: 1.2em;
+}
+input[type="checkbox"] {
+    opacity: 0;
+}
+label {
+    cursor: pointer;
+}

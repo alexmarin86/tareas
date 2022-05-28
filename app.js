@@ -5,6 +5,7 @@ const lista = document.querySelector('.tareas')
 const listaErrores = {
 	elemExiste: 'Este elemento ya existe en la lista.',
 	introTexto: 'Introduce texto válido.',
+	numerosNo: 'No vale introducir un número.',
 }
 //función que recoge el texto del usuario
 const grabaTexto = (event) => {
@@ -13,6 +14,11 @@ const grabaTexto = (event) => {
 	const listaTareas = lista.querySelectorAll('label')
 	if (!inputTarea.value) {
 		mostrarAlerta(listaErrores.introTexto)
+		const ocultar = setTimeout(ocultarAlerta, 2000)
+		return
+	}
+	if (parseInt(inputTarea.value) || inputTarea.value === '0') {
+		mostrarAlerta(listaErrores.numerosNo)
 		const ocultar = setTimeout(ocultarAlerta, 2000)
 		return
 	}

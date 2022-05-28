@@ -6,38 +6,20 @@ const listaErrores = {
 	elemExiste: 'Este elemento ya existe en la lista.',
 	introTexto: 'Introduce texto válido.',
 }
+let control = false
 //función que recoge el texto del usuario
 const grabaTexto = (event) => {
 	event.preventDefault()
 	const tareaActual = inputTarea.value.toLowerCase()
 	const listaTareas = lista.querySelectorAll('label')
-	if (!inputTarea.value) {
-		mostrarAlerta(listaErrores.introTexto)
-		const ocultar = setTimeout(ocultarAlerta, 2000)
-		return
-	}
-	for (let i = 0; i < listaTareas.length; i++) {
-		if (tareaActual == listaTareas[i].innerText.toLowerCase()) {
-			mostrarAlerta(listaErrores.elemExiste)
-			const ocultar = setTimeout(ocultarAlerta, 2000)
-			return
-		}
-	}
+	validarTarea(tareaActual, listaTareas)
 	const elemLista = document.createElement('li')
-	elemLista.classList.add('elem-lista')
-	const idTarea = tareaActual.split(' ').join('')
-	console.log(idTarea)
-	console.log(tareaActual.split(' '))
-	console.log([...tareaActual])
-	const tareaHtml = `
-        <input type="checkbox" name="${idTarea}" id="${idTarea}">
-        <label for="${idTarea}" class="texto">${tareaActual}</label>
-        <span class="editar">&#128393;</span>
-        <span class="cerrar">&times;</span>
-    `
-	elemLista.innerHTML = tareaHtml
-	lista.append(elemLista)
-	inputTarea.value = ''
+	if (control == true) {
+		control = false
+		return
+	} else {
+		crearLi(tareaActual, elemLista)
+	}
 	elemLista
 		.getElementsByClassName('cerrar')[0]
 		.addEventListener('click', eliminarElemLista)
@@ -71,3 +53,39 @@ const mostrarAlerta = (error) => {
 	document.querySelector('.contenedor').append(alerta)
 }
 const ocultarAlerta = () => document.querySelector('.alerta').remove()
+
+//función para validar el input tarea
+
+const validarTarea = (tareaActual, listaTareas) => {
+	if (!inputTarea.value) {
+		mostrarAlerta(listaErrores.introTexto)
+		const ocultar = setTimeout(ocultarAlerta, 2000)
+		control = true
+	}
+	for (let i = 0; i < listaTareas.length; i++) {
+		if (tareaActual == listaTareas[i].innerText.toLowerCase()) {
+			mostrarAlerta(listaErrores.elemExiste)
+			const ocultar = setTimeout(ocultarAlerta, 2000)
+			control = true
+		}
+	}
+}
+
+//función para crear y añadir elementos li
+
+const crearLi = (tareaActual, elemLista) => {
+	elemLista.classList.add('elem-lista')
+	const idTarea = tareaActual.split(' ').join('')
+	console.log(idTarea)
+	console.log(tareaActual.split(' '))
+	console.log([...tareaActual])
+	const tareaHtml = `
+        <input type="checkbox" name="${idTarea}" id="${idTarea}">
+        <label for="${idTarea}" class="texto">${tareaActual}</label>
+        <span class="editar">&#128393;</span>
+        <span class="cerrar">&times;</span>
+    `
+	elemLista.innerHTML = tareaHtml
+	lista.append(elemLista)
+	inputTarea.value = ''
+}
